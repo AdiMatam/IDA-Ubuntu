@@ -1,0 +1,5 @@
+compile:
+
+gcc -c idaHeat2D_klu.c idaHeat2D_klu.o -I../../../../suitesparse/include -I../../../include
+
+gcc idaHeat2D_klu.o -o idaHeat2D_klu -L../../../lib -L/home/aditya/Dev/suitesparse/lib2 -lsundials_ida -lsundials_nvecserial -lsundials_nvecmanyvector -lm -lsundials_sunlinsolklu -lklu -lamd -lcolamd -lbtf -lsuitesparseconfig

@@ -1,0 +1,10 @@
+## ONLY RELEVANT FOR INSTALLATION, IGNORE FOR COMPILING/RUNNING/ETCJ
+
+KLU:
+find -iname "*.a" -exec mv -t lib2/ {} +
+^ move .a file to lib2 directory after building (static)
+
+SUPERLU:
+Use pthread because openmp buggy (copy make.pthread into make.inc)
+Must use static version of sundials
+
