@@ -79,8 +79,9 @@ def main():
     sub.call(compile_call, shell=True)
     sub.call(link_call, shell=True)
 
-    if sys.argv[3] == "run":
-        sub.call(f"./{exe} {''.join(sys.argv[4:])}", shell=True)
+    if len(sys.argv) > 3:
+        if sys.argv[3] == "run":
+            sub.call(f"./{exe} {''.join(sys.argv[4:])}", shell=True)
 
 main()
 
