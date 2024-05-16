@@ -59,6 +59,9 @@
 #define BVAL  RCONST(0.0)
 //#define TOTAL 4*MGRID+8*(MGRID-2)+(MGRID-4)*(MGRID+4*(MGRID-2)) /* total num of nonzero elements */
 
+#define realtype sunrealtype
+#define RCONST SUN_RCONST
+
 int MGRID,NEQ,TOTAL;
 
 /* Type: UserData */
@@ -134,7 +137,7 @@ int main(int argc, char** argv)
   LS = NULL;
 
   /* Create the SUNDIALS context object for this simulation */
-  retval = SUNContext_Create(NULL, &ctx);
+  retval = SUNContext_Create(SUN_COMM_NULL, &ctx);
   if (check_retval(&retval, "SUNContext_Create", 1)) return 1;
 
   /* Create vectors uu, up, res, constraints, id. */
