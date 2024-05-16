@@ -16,7 +16,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_targetsDefined)
 set(_targetsNotDefined)
 set(_expectedTargets)
-foreach(_expectedTarget SUNDIALS::generic_static SUNDIALS::nvecserial_static SUNDIALS::nvecmanyvector_static SUNDIALS::nvecmpimanyvector_static SUNDIALS::nvecparallel_static SUNDIALS::nvecmpiplusx_static SUNDIALS::nvecpthreads_static SUNDIALS::sunmatrixband_static SUNDIALS::sunmatrixdense_static SUNDIALS::sunmatrixsparse_static SUNDIALS::sunlinsolband_static SUNDIALS::sunlinsoldense_static SUNDIALS::sunlinsolpcg_static SUNDIALS::sunlinsolspbcgs_static SUNDIALS::sunlinsolspfgmr_static SUNDIALS::sunlinsolspgmr_static SUNDIALS::sunlinsolsptfqmr_static SUNDIALS::sunlinsolklu_static SUNDIALS::sunlinsolsuperlumt_static SUNDIALS::sunnonlinsolnewton_static SUNDIALS::sunnonlinsolfixedpoint_static SUNDIALS::ida_static)
+foreach(_expectedTarget SUNDIALS::core_static SUNDIALS::nvecserial_static SUNDIALS::nvecmanyvector_static SUNDIALS::nvecpthreads_static SUNDIALS::sunmatrixband_static SUNDIALS::sunmatrixdense_static SUNDIALS::sunmatrixsparse_static SUNDIALS::sunlinsolband_static SUNDIALS::sunlinsoldense_static SUNDIALS::sunlinsolpcg_static SUNDIALS::sunlinsolspbcgs_static SUNDIALS::sunlinsolspfgmr_static SUNDIALS::sunlinsolspgmr_static SUNDIALS::sunlinsolsptfqmr_static SUNDIALS::sunlinsolsuperlumt_static SUNDIALS::sunnonlinsolnewton_static SUNDIALS::sunnonlinsolfixedpoint_static SUNDIALS::ida_static)
   list(APPEND _expectedTargets ${_expectedTarget})
   if(NOT TARGET ${_expectedTarget})
     list(APPEND _targetsNotDefined ${_expectedTarget})
@@ -50,10 +50,10 @@ if(_IMPORT_PREFIX STREQUAL "/")
   set(_IMPORT_PREFIX "")
 endif()
 
-# Create imported target SUNDIALS::generic_static
-add_library(SUNDIALS::generic_static STATIC IMPORTED)
+# Create imported target SUNDIALS::core_static
+add_library(SUNDIALS::core_static STATIC IMPORTED)
 
-set_target_properties(SUNDIALS::generic_static PROPERTIES
+set_target_properties(SUNDIALS::core_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
   INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
 )
@@ -63,7 +63,7 @@ add_library(SUNDIALS::nvecserial_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::nvecserial_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 # Create imported target SUNDIALS::nvecmanyvector_static
@@ -71,31 +71,7 @@ add_library(SUNDIALS::nvecmanyvector_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::nvecmanyvector_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
-)
-
-# Create imported target SUNDIALS::nvecmpimanyvector_static
-add_library(SUNDIALS::nvecmpimanyvector_static STATIC IMPORTED)
-
-set_target_properties(SUNDIALS::nvecmpimanyvector_static PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
-)
-
-# Create imported target SUNDIALS::nvecparallel_static
-add_library(SUNDIALS::nvecparallel_static STATIC IMPORTED)
-
-set_target_properties(SUNDIALS::nvecparallel_static PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
-)
-
-# Create imported target SUNDIALS::nvecmpiplusx_static
-add_library(SUNDIALS::nvecmpiplusx_static STATIC IMPORTED)
-
-set_target_properties(SUNDIALS::nvecmpiplusx_static PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 # Create imported target SUNDIALS::nvecpthreads_static
@@ -103,7 +79,7 @@ add_library(SUNDIALS::nvecpthreads_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::nvecpthreads_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;\$<LINK_ONLY:Threads::Threads>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static;\$<LINK_ONLY:Threads::Threads>"
 )
 
 # Create imported target SUNDIALS::sunmatrixband_static
@@ -111,7 +87,7 @@ add_library(SUNDIALS::sunmatrixband_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunmatrixband_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 # Create imported target SUNDIALS::sunmatrixdense_static
@@ -119,7 +95,7 @@ add_library(SUNDIALS::sunmatrixdense_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunmatrixdense_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 # Create imported target SUNDIALS::sunmatrixsparse_static
@@ -127,7 +103,7 @@ add_library(SUNDIALS::sunmatrixsparse_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunmatrixsparse_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 # Create imported target SUNDIALS::sunlinsolband_static
@@ -135,7 +111,7 @@ add_library(SUNDIALS::sunlinsolband_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunlinsolband_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::sunmatrixband_static"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static;SUNDIALS::sunmatrixband_static"
 )
 
 # Create imported target SUNDIALS::sunlinsoldense_static
@@ -143,7 +119,7 @@ add_library(SUNDIALS::sunlinsoldense_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunlinsoldense_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::sunmatrixdense_static"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static;SUNDIALS::sunmatrixdense_static"
 )
 
 # Create imported target SUNDIALS::sunlinsolpcg_static
@@ -151,7 +127,7 @@ add_library(SUNDIALS::sunlinsolpcg_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunlinsolpcg_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 # Create imported target SUNDIALS::sunlinsolspbcgs_static
@@ -159,7 +135,7 @@ add_library(SUNDIALS::sunlinsolspbcgs_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunlinsolspbcgs_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 # Create imported target SUNDIALS::sunlinsolspfgmr_static
@@ -167,7 +143,7 @@ add_library(SUNDIALS::sunlinsolspfgmr_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunlinsolspfgmr_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 # Create imported target SUNDIALS::sunlinsolspgmr_static
@@ -175,7 +151,7 @@ add_library(SUNDIALS::sunlinsolspgmr_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunlinsolspgmr_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 # Create imported target SUNDIALS::sunlinsolsptfqmr_static
@@ -183,15 +159,7 @@ add_library(SUNDIALS::sunlinsolsptfqmr_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunlinsolsptfqmr_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
-)
-
-# Create imported target SUNDIALS::sunlinsolklu_static
-add_library(SUNDIALS::sunlinsolklu_static STATIC IMPORTED)
-
-set_target_properties(SUNDIALS::sunlinsolklu_static PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::sunmatrixsparse_static;SUNDIALS::KLU"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 # Create imported target SUNDIALS::sunlinsolsuperlumt_static
@@ -199,7 +167,7 @@ add_library(SUNDIALS::sunlinsolsuperlumt_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunlinsolsuperlumt_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::sunmatrixsparse_static;SUNDIALS::SUPERLUMT"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static;SUNDIALS::sunmatrixsparse_static;SUNDIALS::SUPERLUMT"
 )
 
 # Create imported target SUNDIALS::sunnonlinsolnewton_static
@@ -207,7 +175,7 @@ add_library(SUNDIALS::sunnonlinsolnewton_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunnonlinsolnewton_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 # Create imported target SUNDIALS::sunnonlinsolfixedpoint_static
@@ -215,7 +183,7 @@ add_library(SUNDIALS::sunnonlinsolfixedpoint_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::sunnonlinsolfixedpoint_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 # Create imported target SUNDIALS::ida_static
@@ -223,7 +191,7 @@ add_library(SUNDIALS::ida_static STATIC IMPORTED)
 
 set_target_properties(SUNDIALS::ida_static PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:-lm>;SUNDIALS::core_static"
 )
 
 if(CMAKE_VERSION VERSION_LESS 2.8.12)

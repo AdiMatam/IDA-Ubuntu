@@ -27,9 +27,9 @@ class Spec:
 
 linkmap = {
     "standard": Spec(
-        compiledirs = ["sundials/include"],
+        compiledirs = ["sundials/include", "/usr/include/x86_64-linux-gnu/mpich"],
         linkdirs = ["sundials/lib"],
-        links = ["sundials_ida", "sundials_nvecserial", "sundials_nvecmanyvector", "m"],
+        links = ["sundials_ida", "sundials_nvecserial", "sundials_nvecmanyvector", "m", "sundials_core", "mpi"],
     ),
 }
 
@@ -37,9 +37,9 @@ linkmap.update({
     "superlu": linkmap["standard"] +
         Spec(
             compiledirs = ["superlu/SRC"],
-            linkdirs = ["superlu/lib"],
-            links = ["sundials_sunlinsolsuperlumt", "superlu_mt_PTHREAD"],
-            raws = ["/usr/lib/x86_64-linux-gnu/libblas.so"]
+            linkdirs = ["superlu/lib", "/usr/lib/x86_64-linux-gnu/openblas-pthread"],
+            links = ["sundials_sunlinsolsuperlumt", "superlu_mt_PTHREAD", "openblasp-r0.3.20"],
+#            raws = ["/usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so"]
     ),
     
     "klu": linkmap["standard"] + 

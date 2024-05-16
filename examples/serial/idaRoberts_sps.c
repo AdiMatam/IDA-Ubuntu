@@ -46,10 +46,14 @@
 #define NEQ   3
 #define NOUT  12
 
+#define RCONST SUN_RCONST
+
 #define ZERO RCONST(0.0)
 #define ONE  RCONST(1.0)
 
 /* Prototypes of functions called by IDA */
+
+#define realtype sunrealtype
 
 int resrob(realtype tres, N_Vector yy, N_Vector yp,
            N_Vector resval, void *user_data);
@@ -95,7 +99,7 @@ int main(void)
   LS = NULL;
 
   /* Create the SUNDIALS context object for this simulation */
-  retval = SUNContext_Create(NULL, &ctx);
+  retval = SUNContext_Create(SUN_COMM_NULL, &ctx);
   if (check_retval(&retval, "SUNContext_Create", 1)) return 1;
 
   /* Allocate N-vectors. */

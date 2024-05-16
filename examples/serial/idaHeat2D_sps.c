@@ -50,14 +50,16 @@
 
 /* Problem Constants */
 
-#define NOUT  9
-#define MGRID 100
-#define NEQ   MGRID*MGRID
+#define NOUT  10
+//#define MGRID 10
+//#define NEQ   MGRID*MGRID
 #define ZERO  RCONST(0.0)
 #define ONE   RCONST(1.0)
 #define TWO   RCONST(2.0)
 #define BVAL  RCONST(0.0)
-#define TOTAL 4*MGRID+8*(MGRID-2)+(MGRID-4)*(MGRID+4*(MGRID-2)) /* total num of nonzero elements */
+//#define TOTAL 4*MGRID+8*(MGRID-2)+(MGRID-4)*(MGRID+4*(MGRID-2)) /* total num of nonzero elements */
+
+int MGRID,NEQ,TOTAL;
 
 /* Type: UserData */
 
@@ -97,14 +99,29 @@ static int check_retval(void *returnvalue, const char *funcname, int opt);
  *--------------------------------------------------------------------
  */
 
-int main(void)
+int main(int argc, char** argv)
 {
+  int N_THREAD=1;
+  MGRID=10;
+  if (argc>1) {
+ 	N_THREAD=atoi(argv[1]);
+	if (argc>2) {
+		MGRID=atoi(argv[2]);
+	}
+
+  }
+  NEQ=MGRID*MGRID;
+  TOTAL=4*MGRID+8*(MGRID-2)+(MGRID-4)*(MGRID+4*(MGRID-2)); /* total num of nonzero elements */
+
+
+  printf("Using %d THREADS to evaluate %dx%d system\n", N_THREAD, MGRID, MGRID);
+
   void *mem;
   UserData data;
   N_Vector uu, up, constraints, id, res;
   int retval, iout;
   long int netf, ncfn;
-  realtype rtol, atol, t0, t1, tout, tret;
+  realtype rtol, atol, t0, t1, tout, tret, tf;
   SUNMatrix A;
   SUNLinearSolver LS;
   sunindextype nnz;
@@ -147,9 +164,11 @@ int main(void)
 
   /* Set remaining input parameters. */
   t0   = ZERO;
-  t1   = RCONST(0.01);
+  tf   = ONE; 
+  realtype dt = (tf-t0) / NOUT;
+  t1   = t0 + dt;
   rtol = ZERO;
-  atol = RCONST(1.0e-8);
+  atol = RCONST(1.0e-6);
 
   /* Call IDACreate and IDAMalloc to initialize solution */
   mem = IDACreate(ctx);
@@ -178,7 +197,7 @@ int main(void)
   if(check_retval((void*)A, "SUNSparseMtarix", 0)) return(1);
 
   /* Create SuperLUMT SUNLinearSolver object (one thread) */
-  LS = SUNLinSol_SuperLUMT(uu, A, 1, ctx);
+  LS = SUNLinSol_SuperLUMT(uu, A, N_THREAD, ctx);
   if(check_retval((void *)LS, "SUNLinSol_SuperLUMT", 0)) return(1);
 
   /* Attach the matrix and linear solver */
@@ -202,6 +221,11 @@ int main(void)
   retval = IDACalcIC(mem, IDA_YA_YDP_INIT, t1);
   if(check_retval(&retval, "IDACalcIC", 1)) return(1);
 
+  retval = IDASetMaxNumSteps(mem, 5000);
+  if(check_retval(&retval, "IDASetMaxNumSteps", 1)) return 1;
+  
+
+  
   /* Print output heading. */
   PrintHeader(rtol, atol);
 
@@ -210,7 +234,7 @@ int main(void)
 
   /* Loop over output times, call IDASolve, and print results. */
 
-  for (tout = t1, iout = 1; iout <= NOUT; iout++, tout *= TWO) {
+  for (tout = t1, iout = 1; iout <= NOUT; iout++, tout +=dt) {
 
     retval = IDASolve(mem, tout, &tret, uu, up, IDA_NORMAL);
     if(check_retval(&retval, "IDASolve", 1)) return(1);

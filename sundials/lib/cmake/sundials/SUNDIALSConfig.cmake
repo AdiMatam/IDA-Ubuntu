@@ -2,7 +2,7 @@
 # Programmer(s): Cody J. Balos @ LLNL
 # ---------------------------------------------------------------
 # SUNDIALS Copyright Start
-# Copyright (c) 2002-2023, Lawrence Livermore National Security
+# Copyright (c) 2002-2024, Lawrence Livermore National Security
 # and Southern Methodist University.
 # All rights reserved.
 #
@@ -42,7 +42,7 @@ include(CMakeFindDependencyMacro)
 
 ### ------- Set FOUND status for SUNDIALS components
 
-set(_installed_components "ida;sunnonlinsolfixedpoint;sunnonlinsolnewton;sunlinsolsuperlumt;sunlinsolklu;sunlinsolsptfqmr;sunlinsolspgmr;sunlinsolspfgmr;sunlinsolspbcgs;sunlinsolpcg;sunlinsoldense;sunlinsolband;sunmatrixsparse;sunmatrixdense;sunmatrixband;nvecpthreads;nvecmpiplusx;nvecparallel;nvecmpimanyvector;nvecmanyvector;nvecserial;generic;ida;sunnonlinsolfixedpoint;sunnonlinsolnewton;sunlinsolsuperlumt;sunlinsolklu;sunlinsolsptfqmr;sunlinsolspgmr;sunlinsolspfgmr;sunlinsolspbcgs;sunlinsolpcg;sunlinsoldense;sunlinsolband;sunmatrixsparse;sunmatrixdense;sunmatrixband;nvecpthreads;nvecmpiplusx;nvecparallel;nvecmpimanyvector;nvecmanyvector;nvecserial;generic;ida;sunnonlinsolfixedpoint;sunnonlinsolnewton;sunlinsolsuperlumt;sunlinsolklu;sunlinsolsptfqmr;sunlinsolspgmr;sunlinsolspfgmr;sunlinsolspbcgs;sunlinsolpcg;sunlinsoldense;sunlinsolband;sunmatrixsparse;sunmatrixdense;sunmatrixband;nvecpthreads;nvecmpiplusx;nvecparallel;nvecmpimanyvector;nvecmanyvector;nvecserial;generic;ida;sunnonlinsolfixedpoint;sunnonlinsolnewton;sunlinsolsuperlumt;sunlinsolklu;sunlinsolsptfqmr;sunlinsolspgmr;sunlinsolspfgmr;sunlinsolspbcgs;sunlinsolpcg;sunlinsoldense;sunlinsolband;sunmatrixsparse;sunmatrixdense;sunmatrixband;nvecpthreads;nvecmpiplusx;nvecparallel;nvecmpimanyvector;nvecmanyvector;nvecserial;generic;ida;sunnonlinsolfixedpoint;sunnonlinsolnewton;sunlinsolsuperlumt;sunlinsolklu;sunlinsolsptfqmr;sunlinsolspgmr;sunlinsolspfgmr;sunlinsolspbcgs;sunlinsolpcg;sunlinsoldense;sunlinsolband;sunmatrixsparse;sunmatrixdense;sunmatrixband;nvecpthreads;nvecmpiplusx;nvecparallel;nvecmpimanyvector;nvecmanyvector;nvecserial;generic;ida;sunnonlinsolfixedpoint;sunnonlinsolnewton;sunlinsolsuperlumt;sunlinsolklu;sunlinsolsptfqmr;sunlinsolspgmr;sunlinsolspfgmr;sunlinsolspbcgs;sunlinsolpcg;sunlinsoldense;sunlinsolband;sunmatrixsparse;sunmatrixdense;sunmatrixband;nvecpthreads;nvecmpiplusx;nvecparallel;nvecmpimanyvector;nvecmanyvector;nvecserial;generic;kinsol;idas;ida;cvodes;cvode;arkode;sunnonlinsolfixedpoint;sunnonlinsolnewton;sunlinsolsptfqmr;sunlinsolspgmr;sunlinsolspfgmr;sunlinsolspbcgs;sunlinsolpcg;sunlinsoldense;sunlinsolband;sunmatrixsparse;sunmatrixdense;sunmatrixband;nvecmanyvector;nvecserial;generic;")
+set(_installed_components "ida;sunnonlinsolfixedpoint;sunnonlinsolnewton;sunlinsolsuperlumt;sunlinsolsptfqmr;sunlinsolspgmr;sunlinsolspfgmr;sunlinsolspbcgs;sunlinsolpcg;sunlinsoldense;sunlinsolband;sunmatrixsparse;sunmatrixdense;sunmatrixband;nvecpthreads;nvecmanyvector;nvecserial;core;ida;sunnonlinsolfixedpoint;sunnonlinsolnewton;sunlinsolsuperlumt;sunlinsolsptfqmr;sunlinsolspgmr;sunlinsolspfgmr;sunlinsolspbcgs;sunlinsolpcg;sunlinsoldense;sunlinsolband;sunmatrixsparse;sunmatrixdense;sunmatrixband;nvecpthreads;nvecmanyvector;nvecserial;core;ida;sunnonlinsolfixedpoint;sunnonlinsolnewton;sunlinsolsptfqmr;sunlinsolspgmr;sunlinsolspfgmr;sunlinsolspbcgs;sunlinsolpcg;sunlinsoldense;sunlinsolband;sunmatrixsparse;sunmatrixdense;sunmatrixband;nvecmanyvector;nvecserial;core;kinsol;idas;ida;cvodes;cvode;arkode;sunnonlinsolfixedpoint;sunnonlinsolnewton;sunlinsolsptfqmr;sunlinsolspgmr;sunlinsolspfgmr;sunlinsolspbcgs;sunlinsolpcg;sunlinsoldense;sunlinsolband;sunmatrixsparse;sunmatrixdense;sunmatrixband;nvecmanyvector;nvecserial;core;")
 
 set(_comp_not_found "")
 foreach(_comp ${SUNDIALS_FIND_COMPONENTS})
@@ -64,7 +64,7 @@ include("${CMAKE_CURRENT_LIST_DIR}/SUNDIALSTargets.cmake")
 
 ### ------- Alias targets
 
-set(_SUNDIALS_ALIAS_TARGETS "sundials_ida->sundials_ida_static;sundials_sunnonlinsolfixedpoint->sundials_sunnonlinsolfixedpoint_static;sundials_sunnonlinsolnewton->sundials_sunnonlinsolnewton_static;sundials_sunlinsolsuperlumt->sundials_sunlinsolsuperlumt_static;sundials_sunlinsolklu->sundials_sunlinsolklu_static;sundials_sunlinsolsptfqmr->sundials_sunlinsolsptfqmr_static;sundials_sunlinsolspgmr->sundials_sunlinsolspgmr_static;sundials_sunlinsolspfgmr->sundials_sunlinsolspfgmr_static;sundials_sunlinsolspbcgs->sundials_sunlinsolspbcgs_static;sundials_sunlinsolpcg->sundials_sunlinsolpcg_static;sundials_sunlinsoldense->sundials_sunlinsoldense_static;sundials_sunlinsolband->sundials_sunlinsolband_static;sundials_sunmatrixsparse->sundials_sunmatrixsparse_static;sundials_sunmatrixdense->sundials_sunmatrixdense_static;sundials_sunmatrixband->sundials_sunmatrixband_static;sundials_nvecpthreads->sundials_nvecpthreads_static;sundials_nvecmpiplusx->sundials_nvecmpiplusx_static;sundials_nvecparallel->sundials_nvecparallel_static;sundials_nvecmpimanyvector->sundials_nvecmpimanyvector_static;sundials_nvecmanyvector->sundials_nvecmanyvector_static;sundials_nvecserial->sundials_nvecserial_static;sundials_generic->sundials_generic_static;")
+set(_SUNDIALS_ALIAS_TARGETS "sundials_ida->sundials_ida_static;sundials_sunnonlinsolfixedpoint->sundials_sunnonlinsolfixedpoint_static;sundials_sunnonlinsolnewton->sundials_sunnonlinsolnewton_static;sundials_sunlinsolsuperlumt->sundials_sunlinsolsuperlumt_static;sundials_sunlinsolsptfqmr->sundials_sunlinsolsptfqmr_static;sundials_sunlinsolspgmr->sundials_sunlinsolspgmr_static;sundials_sunlinsolspfgmr->sundials_sunlinsolspfgmr_static;sundials_sunlinsolspbcgs->sundials_sunlinsolspbcgs_static;sundials_sunlinsolpcg->sundials_sunlinsolpcg_static;sundials_sunlinsoldense->sundials_sunlinsoldense_static;sundials_sunlinsolband->sundials_sunlinsolband_static;sundials_sunmatrixsparse->sundials_sunmatrixsparse_static;sundials_sunmatrixdense->sundials_sunmatrixdense_static;sundials_sunmatrixband->sundials_sunmatrixband_static;sundials_nvecpthreads->sundials_nvecpthreads_static;sundials_nvecmanyvector->sundials_nvecmanyvector_static;sundials_nvecserial->sundials_nvecserial_static;sundials_core->sundials_core_static;")
 foreach(ptr ${_SUNDIALS_ALIAS_TARGETS})
   string(REGEX REPLACE "sundials_" "" ptr "${ptr}")
   string(REGEX MATCHALL "([A-Za-z_]+)->([A-Za-z_]+)"
@@ -79,12 +79,21 @@ endforeach()
 
 ### ------- Create TPL imported targets
 
+if("OFF" AND NOT TARGET MPI::MPI_C)
+  set(MPI_C_COMPILER "")
+  find_dependency(MPI)
+endif()
+
 if("OFF" AND NOT TARGET OpenMP::OpenMP_C)
   find_dependency(OpenMP)
 endif()
 
 if("" AND NOT TARGET caliper)
   find_dependency(CALIPER PATHS "")
+endif()
+
+if("" AND NOT TARGET adiak::adiak)
+  find_dependency(adiak PATHS "")
 endif()
 
 if("OFF" AND NOT (TARGET CUDA::cudart AND TARGET CUDA::cublas
@@ -105,10 +114,14 @@ if("OFF" AND NOT TARGET SUNDIALS::HYPRE)
   set_target_properties(SUNDIALS::HYPRE PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "")
 endif()
 
-if("ON" AND NOT TARGET SUNDIALS::KLU)
-  add_library(SUNDIALS::KLU INTERFACE IMPORTED)
-  target_link_libraries(SUNDIALS::KLU INTERFACE "/home/aditya/Dev/suitesparse/lib/libklu.so;/home/aditya/Dev/suitesparse/lib/libamd.so;/home/aditya/Dev/suitesparse/lib/libcolamd.so;/home/aditya/Dev/suitesparse/lib/libbtf.so;/home/aditya/Dev/suitesparse/lib/libsuitesparseconfig.so")
-  set_target_properties(SUNDIALS::KLU PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "/home/aditya/Dev/suitesparse/include")
+if("OFF" AND NOT TARGET SUNDIALS::KLU)
+  if("")
+    find_dependency(KLU)
+  else()
+    add_library(SUNDIALS::KLU INTERFACE IMPORTED)
+    target_link_libraries(SUNDIALS::KLU INTERFACE "")
+    set_target_properties(SUNDIALS::KLU PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "")
+  endif()
 endif()
 
 if("OFF" AND NOT TARGET Kokkos::kokkos)
@@ -161,8 +174,8 @@ endif()
 
 if("ON" AND NOT TARGET SUNDIALS::SUPERLUMT)
   add_library(SUNDIALS::SUPERLUMT INTERFACE IMPORTED)
-  target_link_libraries(SUNDIALS::SUPERLUMT INTERFACE "/home/aditya/Dev/superlu/lib/libsuperlu_mt_PTHREAD.a;/usr/lib/x86_64-linux-gnu/libblas.so")
-  set_target_properties(SUNDIALS::SUPERLUMT PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "/home/aditya/Dev/superlu/SRC")
+  target_link_libraries(SUNDIALS::SUPERLUMT INTERFACE "/home/maple/Dev/superlu/lib/libsuperlu_mt_PTHREAD.a")
+  set_target_properties(SUNDIALS::SUPERLUMT PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "/home/maple/Dev/superlu/SRC")
 endif()
 
 if("OFF" AND NOT TARGET RAJA)
